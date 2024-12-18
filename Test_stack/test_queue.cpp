@@ -50,14 +50,14 @@ TEST(TQueue, front_function) {
     TQueue<int> m(3);
     m.push(2);
     m.push(3);
-    ASSERT_NO_THROW(m.front() == 2);  // Проверяем первый элемент
+    ASSERT_NO_THROW(m.front() == 2);  
 }
 
 TEST(TQueue, back_function) {
     TQueue<int> m(3);
     m.push(2);
     m.push(3);
-    ASSERT_NO_THROW(m.back() == 3);  // Проверяем последний элемент
+    ASSERT_NO_THROW(m.back() == 3); 
 }
 
 TEST(TQueue, clear_stack) {
@@ -100,6 +100,18 @@ TEST(TQueue, compare_queues) {
     m.push(5);
     m.push(2);
     TQueue<int> m1(m);
+    ASSERT_NO_THROW(m == m1);
+}
+
+TEST(TQueue, compare_queue_different_head) {
+    TQueue<int> m(5);
+    TQueue<int> m1(m);
+    m.push(5);
+    m.push(10);
+    m1.push(10);
+    m1.push(5);
+    m1.push(10);
+    m1.pop();
     ASSERT_NO_THROW(m == m1);
 }
 

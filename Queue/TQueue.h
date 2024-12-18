@@ -12,7 +12,8 @@ class TQueue
 	int element_counter;
 	int tail;
 	int head;
-
+	
+	//ÄËß ÂÛÂÎÄÀ
 	T operator[](int index) const;
 public:
 	//ÊÎÍÑÒĞÓÊÒÎĞÛ
@@ -33,10 +34,9 @@ public:
 	void clear();
 	T front() const;
 	T back() const;
+	int size() const;
 
 	//ÏÅĞÅÃĞÓÇÊÀ ÂÛÂÎÄÀ + ĞÅÀËÈÇÀÖÈß
-
-
 	friend ostream& operator<<(ostream& out, const TQueue& queue)
 	{
 		for (int i = 0; i < queue.element_counter; i++) {
@@ -99,27 +99,27 @@ TQueue<T>::~TQueue()
 //---------------------------------------------------------//
 
 template <class T>
-TQueue<T>& TQueue<T>::operator=(const TQueue& q) {
-	if (this == &q) return *this;
-	if (mem_size != q.mem_size) {
-		mem_size = q.mem_size;
+TQueue<T>& TQueue<T>::operator=(const TQueue& other_queue) {
+	if (this == &other_queue) return *this;
+	if (mem_size != other_queue.mem_size) {
+		mem_size = other_queue.mem_size;
 		delete[] pMem;
 		pMem = new T[mem_size];
 	}
-	element_counter = q.element_counter;
-	head = q.head;
-	tail = q.tail;
-	if (q.tail >= q.head) {
+	element_counter = other_queue.element_counter;
+	head = other_queue.head;
+	tail = other_queue.tail;
+	if (other_queue.tail >= other_queue.head) {
 		for (int i = 0; head + i <= tail; i++) {
-			pMem[head + i] = q.pMem[head + i];
+			pMem[head + i] = other_queue.pMem[head + i];
 		}
 	}
 	else {
 		for (int i = 0; i <= tail; i++) {
-			pMem[i] = q.pMem[i];
+			pMem[i] = other_queue.pMem[i];
 		}
 		for (int i = head; i < size; i++) {
-			pMem[i] = q.pMem[i];
+			pMem[i] = other_queue.pMem[i];
 		}
 	}
 	return *this;
@@ -128,12 +128,17 @@ TQueue<T>& TQueue<T>::operator=(const TQueue& q) {
 template <class T>
 bool TQueue<T>::operator==(const TQueue& other_queue) const
 {
-	if (mem_size != other_queue.mem_size || element_counter != other_queue.element_counter) 
+	if (mem_size != other_queue.mem_size)
 		return false;
-	if (element_counter == 0) 
-		return true;
-	for (int i = 0; i < element_counter; i++) {
-		if (pMem[(head + i) % mem_size] != other_queue.pMem[(other_queue.head + i) % mem_size]) 
+
+	if (element_counter != other_queue.element_counter)
+		return false;
+
+	for (int i = 0; i < element_counter; i++)
+	{
+		int j1 = (head + i) % mem_size;
+		int j2 = (other_queue.head + i) % mem_size;
+		if (pMem[j1] != other_queue.pMem[j2])
 			return false;
 	}
 	return true;
@@ -145,6 +150,7 @@ bool TQueue<T>::operator!=(const TQueue& other_queue) const
 	return (!(*this == other_queue));
 }
 
+//ÄËß ÂÛÂÎÄÀ
 template <class T>
 T TQueue<T>::operator[](int index) const {
 	return pMem[(head + index) % mem_size];
@@ -204,4 +210,9 @@ T TQueue<T>::back() const
 {
 	if (isEmpty()) throw - 1;
 	return pMem[tail];
+}
+
+template <typename T>
+int TQueue<T>::size() const {
+	return element_counter;
 }
