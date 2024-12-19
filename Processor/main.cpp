@@ -29,13 +29,13 @@ public:
 };
 
 class CPU {
-public:
     bool isBusy;
     int taskID; 
     int currentStepIndex; 
     int allstepsCount;
     int freeTime; 
     int solvedTasksCount;
+public:
 
     CPU() : isBusy(false), taskID(-1), currentStepIndex(0), freeTime(0), solvedTasksCount(0), allstepsCount(0) {}
 
@@ -151,6 +151,7 @@ public:
     {
         tasks.push(new_task);
     }
+
     void processTask(double P, int maxstepcount, int maxprocessorcount)
     {
         if ((rand() % 100) < (P * 100)) {
@@ -226,7 +227,7 @@ public:
         else
         {
             std::cout << "Çàäà÷è â î÷åðåäè:\n";
-            //ÎÒÎÁÐÀÆÅÍÈÅ Î×ÅÐÅÄÈ
+
             TQueue<Task> temp_queue_tasks = tasks;
             while (!temp_queue_tasks.isEmpty()) {
                 Task task = temp_queue_tasks.front();

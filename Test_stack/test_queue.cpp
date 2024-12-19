@@ -23,41 +23,41 @@ TEST(TQueue, copied_queue_is_equal_to_source_one) {
 
 TEST(TQueue, empty_queue) {
     TQueue<int> m(5);
-    ASSERT_NO_THROW(m.isEmpty() == true);
+    EXPECT_EQ(m.isEmpty(), true);
 }
 
 TEST(TQueue, no_empty_queue) {
     TQueue<int> m(5);
     m.push(1);
-    ASSERT_NO_THROW(m.isEmpty() == false);
+    EXPECT_EQ(m.isEmpty(), false);
 }
 
 TEST(TQueue, full_queue) {
     TQueue<int> m(2);
     m.push(5);
     m.push(2);
-    ASSERT_NO_THROW(m.isFull() == true);
+    EXPECT_EQ(m.isFull(), true);
 }
 
 TEST(TQueue, no_full_queue) {
     TQueue<int> m(5);
     m.push(5);
     m.push(10);
-    ASSERT_NO_THROW(m.isFull() == false);
+    EXPECT_EQ(m.isFull(), false);
 }
 
 TEST(TQueue, front_function) {
     TQueue<int> m(3);
     m.push(2);
     m.push(3);
-    ASSERT_NO_THROW(m.front() == 2);  
+    EXPECT_EQ(m.front(), 2);
 }
 
 TEST(TQueue, back_function) {
     TQueue<int> m(3);
     m.push(2);
     m.push(3);
-    ASSERT_NO_THROW(m.back() == 3); 
+    EXPECT_EQ(m.back(),3);
 }
 
 TEST(TQueue, clear_stack) {
@@ -65,14 +65,14 @@ TEST(TQueue, clear_stack) {
     m.push(5);
     m.push(2);
     m.clear();
-    ASSERT_NO_THROW(m.isEmpty() == true);
+    EXPECT_EQ(m.isEmpty(), true);
 }
 
 TEST(TQueue, push_function) {
     TQueue<int> m(2);
     m.push(2);
     m.push(3);
-    ASSERT_NO_THROW(m.back() == 3);
+    EXPECT_EQ(m.back(), 3);
 }
 
 TEST(TQueue, pop_function) {
@@ -80,7 +80,7 @@ TEST(TQueue, pop_function) {
     m.push(2);
     m.push(3);
     m.pop();
-    ASSERT_NO_THROW(m.front() == 3);
+    EXPECT_EQ(m.front(), 3);
 }
 
 TEST(TQueue, pop_from_empty_queue_throws_exception) {
@@ -97,10 +97,10 @@ TEST(TQueue, push_to_full_queue_throws_exception) {
 
 TEST(TQueue, compare_queues) {
     TQueue<int> m(2);
-    m.push(5);
+    m.push(1);
     m.push(2);
     TQueue<int> m1(m);
-    ASSERT_NO_THROW(m == m1);
+    EXPECT_EQ(m, m1);
 }
 
 TEST(TQueue, compare_queue_different_head) {
@@ -112,7 +112,7 @@ TEST(TQueue, compare_queue_different_head) {
     m1.push(5);
     m1.push(10);
     m1.pop();
-    ASSERT_NO_THROW(m == m1);
+    EXPECT_EQ(m, m1);
 }
 
 TEST(TQueue, no_compare_queue) {
@@ -122,5 +122,5 @@ TEST(TQueue, no_compare_queue) {
     m.push(10);
     m1.push(10);
     m1.push(5);
-    ASSERT_NO_THROW(m != m1);
+    EXPECT_NE(m, m1);
 }
