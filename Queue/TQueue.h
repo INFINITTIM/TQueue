@@ -77,11 +77,11 @@ TQueue<T>::TQueue(const TQueue& other_queue)
 	}
 	else
 	{
-		for (int i = head; i <= mem_size; i++)
+		for (int i = head; i < mem_size; i++)
 		{
 			pMem[i] = other_queue.pMem[i];
 		}
-		for (int i = 0; i < tail; i++)
+		for (int i = 0; i <= tail; i++)
 		{
 			pMem[i] = other_queue.pMem[i];
 		}
