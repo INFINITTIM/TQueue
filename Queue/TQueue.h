@@ -100,7 +100,7 @@ TQueue<T>::~TQueue()
 
 template <class T>
 TQueue<T>& TQueue<T>::operator=(const TQueue& other_queue) {
-	if (*this == &other_queue) return *this;
+	if (this == &other_queue) return *this;
 	if (mem_size != other_queue.mem_size) {
 		mem_size = other_queue.mem_size;
 		delete[] pMem;
