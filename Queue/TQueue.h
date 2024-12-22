@@ -118,7 +118,7 @@ TQueue<T>& TQueue<T>::operator=(const TQueue& other_queue) {
 		for (int i = 0; i <= tail; i++) {
 			pMem[i] = other_queue.pMem[i];
 		}
-		for (int i = head; i < size; i++) {
+		for (int i = head; i < mem_size; i++) {
 			pMem[i] = other_queue.pMem[i];
 		}
 	}
