@@ -1,8 +1,9 @@
 #include "../Queue/TQueue.h"
+#include "../Queue/LQueue.h"
 
 #include "gtest.h"
 
-TEST(TQueue, can_create_queue_with_positive_size){
+TEST(TQueue, can_create_queue_with_positive_size) {
     ASSERT_NO_THROW(TQueue<int> m(5));
 }
 
@@ -123,4 +124,134 @@ TEST(TQueue, no_compare_queue) {
     m1.push(10);
     m1.push(5);
     EXPECT_NE(m, m1);
+}
+
+// ------------------------------------------------------------------------------------------------------- // 
+
+TEST(LQueue, can_create_queue) {
+    ASSERT_NO_THROW(LQueue<int> q);
+}
+
+TEST(LQueue, empty_queue) {
+    LQueue<int> q;
+    EXPECT_TRUE(q.isEmpty());
+}
+
+TEST(LQueue, no_empty_queue) {
+    LQueue<int> q;
+    q.push(1);
+    EXPECT_FALSE(q.isEmpty());
+}
+
+TEST(LQueue, can_push_queue) {
+    LQueue<int> q;
+    q.push(2);
+    q.push(3);
+    EXPECT_EQ(q.back(), 3);
+}
+
+TEST(LQueue, can_pop_queue) {
+    LQueue<int> q;
+    q.push(2);
+    q.push(3);
+    q.push(4);
+    q.pop();
+    EXPECT_EQ(q.front(), 3);
+}
+
+TEST(LQueue, can_get_front) {
+    LQueue<int> q;
+    q.push(1);
+    q.push(2);
+
+    EXPECT_EQ(q.front(), 1);
+}
+
+TEST(LQueue, can_get_back) {
+    LQueue<int> q;
+    q.push(1);
+    q.push(2);
+
+    EXPECT_EQ(q.back(), 2);
+}
+
+TEST(LQueue, can_clear_queue) {
+    LQueue<int> q;
+    q.push(1);
+    q.push(2);
+    q.clear();
+    EXPECT_TRUE(q.isEmpty());
+}
+
+TEST(LQueue, can_check_size) {
+    LQueue<int> q;
+    EXPECT_EQ(q.size(), 0);
+    q.push(1);
+    EXPECT_EQ(q.size(), 1);
+    q.push(2);
+    EXPECT_EQ(q.size(), 2);
+    q.pop();
+    EXPECT_EQ(q.size(), 1);
+}
+
+TEST(LQueue, compare_queues) {
+    LQueue<int> q1;
+    LQueue<int> q2;
+
+    q1.push(1);
+    q1.push(2);
+
+    q2.push(1);
+    q2.push(2);
+
+    EXPECT_TRUE(q1 == q2);
+}
+
+TEST(LQueue,  no_compare_queues) {
+    LQueue<int> q1;
+    LQueue<int> q2;
+
+    q1.push(1);
+    q1.push(2);
+
+    q2.push(1);
+    q2.push(2);
+    q2.push(3);
+
+    EXPECT_TRUE(q1 != q2);
+}
+
+TEST(LQueue, can_throw_on_empty_pop) {
+    LQueue<int> q;
+
+    EXPECT_THROW(q.pop(), int); 
+}
+
+TEST(LQueue, can_throw_on_empty_front) {
+    LQueue<int> q;
+
+    EXPECT_THROW(q.front(), int); 
+}
+
+TEST(LQueue, can_throw_on_empty_back) {
+    LQueue<int> q;
+
+    EXPECT_THROW(q.back(), int);
+}
+
+TEST(LQueue, can_copy_queue) {
+    LQueue<int> q1;
+    q1.push(1);
+    q1.push(2);
+    LQueue<int> q2(q1);
+    EXPECT_TRUE(q1 == q2);
+}
+
+TEST(LQueue, can_assign_queue) {
+    LQueue<int> q1;
+    q1.push(1);
+    q1.push(2);
+    LQueue<int> q2;
+    q2 = q1;
+    EXPECT_TRUE(q1 == q2);
 }

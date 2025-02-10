@@ -3,6 +3,7 @@
 #include <thread>
 #include <chrono>
 #include "../Queue/TQueue.h"
+#include "../Queue/LQueue.h"
 
 class Task {
     int id;
@@ -140,9 +141,9 @@ class Program
 {
 public:
     std::vector<CPU> processors;
-    TQueue<Task> tasks;
+    LQueue<Task> tasks;
 
-    Program(int processorCount) : tasks(100)
+    Program(int processorCount) : tasks()
     {
         processors.resize(processorCount);
     }
@@ -228,7 +229,7 @@ public:
         {
             std::cout << "Задачи в очереди:\n";
 
-            TQueue<Task> temp_queue_tasks = tasks;
+            LQueue<Task> temp_queue_tasks = tasks;
             while (!temp_queue_tasks.isEmpty()) {
                 Task task = temp_queue_tasks.front();
                 std::cout
